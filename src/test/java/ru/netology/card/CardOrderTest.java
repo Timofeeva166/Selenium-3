@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -39,7 +39,11 @@ public class CardOrderTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(files="src/test/resources/valid.csv")
+    @CsvSource({
+          "Дмитрий, +79999999999, Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
+          "Иванов Иван, +68355672431, Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
+          "Кузнецова Анна-Мария, +28888888888, Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
+    })
     public void shouldGetValidResults(String name, String phone, String expected) { //форма заполняется валидными данными
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys(name);
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys(phone);
